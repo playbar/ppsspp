@@ -229,8 +229,13 @@ public:
 protected:
 	void SetDrawType(DrawType type, GEPrimitiveType prim) {
 		if (type != lastDraw_) {
-			gstate_c.Dirty(DIRTY_UVSCALEOFFSET);
+			gstate_c.Dirty(DIRTY_UVSCALEOFFSET | DIRTY_VERTEXSHADER_STATE);
 			lastDraw_ = type;
+		}
+		// Prim == RECTANGLES can cause CanUseHardwareTransform to flip, so we need to dirty.
+		if ((prim == GE_PRIM_RECTANGLES) != (lastPrim_ == GE_PRIM_RECTANGLES)) {
+			gstate_c.Dirty(DIRTY_VERTEXSHADER_STATE);
+			lastPrim_ = prim;
 		}
 	}
 
@@ -342,6 +347,7 @@ protected:
 	bool interruptsEnabled_;
 	bool resized_;
 	DrawType lastDraw_;
+	GEPrimitiveType lastPrim_;
 
 private:
 
