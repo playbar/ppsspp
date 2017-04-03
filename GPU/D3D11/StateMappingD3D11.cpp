@@ -461,8 +461,8 @@ void DrawEngineD3D11::ApplyDrawStateLate(bool applyStencilRef, uint8_t stencilRe
 	float blendColor[4];
 	Uint8x4ToFloat4(blendColor, dynState_.blendColor);
 
-	// we go through Draw here because it automatically handles screen rotation, as needed in UWP on mobiles.
 	if (gstate_c.IsDirty(DIRTY_VIEWPORTSCISSOR_STATE)) {
+		// we go through Draw here because it automatically handles screen rotation, as needed in UWP on mobiles.
 		draw_->SetViewports(1, &dynState_.viewport);
 		draw_->SetScissorRect(dynState_.scissor.left, dynState_.scissor.top, dynState_.scissor.right - dynState_.scissor.left, dynState_.scissor.bottom - dynState_.scissor.top);
 	}
