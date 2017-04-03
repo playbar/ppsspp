@@ -139,6 +139,7 @@ void ShaderManagerD3D11::DirtyLastShader() {
 	lastVSID_.clear();
 	lastVShader_ = nullptr;
 	lastFShader_ = nullptr;
+	gstate_c.Dirty(DIRTY_VERTEXSHADER_STATE);
 }
 
 uint64_t ShaderManagerD3D11::UpdateUniforms() {
