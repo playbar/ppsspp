@@ -51,14 +51,14 @@ android {
 		new File("versionname.txt").write(androidGitVersion.name())
 		new File("versioncode.txt").write(androidGitVersion.code().toString())
 
-		minSdkVersion 9
+		minSdkVersion 24
 		targetSdkVersion 25
 		if (project.hasProperty("ANDROID_VERSION_CODE") && project.hasProperty("ANDROID_VERSION_NAME")) {
 			versionCode ANDROID_VERSION_CODE
 			versionName ANDROID_VERSION_NAME
 		}
 		ndk {
-			abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+			abiFilters 'armeabi-v7a'
 		}
 		signingConfig signingConfigs.debug
 	}
@@ -100,21 +100,21 @@ android {
 		}
 	}
 	productFlavors {
-		normal {
-			applicationId 'org.ppsspp.ppsspp'
-			dimension "variant"
-			externalNativeBuild {
-				cmake {
-					// Available arguments listed at https://developer.android.com/ndk/guides/cmake.html
-					arguments '-DANDROID=true',
-							'-DANDROID_PLATFORM=android-15',
-							'-DANDROID_TOOLCHAIN=clang',
-							'-DANDROID_CPP_FEATURES=',
-							'-DANDROID_STL=gnustl_static',
-							'-DANDROID_ARM_NEON=TRUE'
-				}
-			}
-		}
+//		normal {
+//			applicationId 'org.ppsspp.ppsspp'
+//			dimension "variant"
+//			externalNativeBuild {
+//				cmake {
+//					// Available arguments listed at https://developer.android.com/ndk/guides/cmake.html
+//					arguments '-DANDROID=true',
+//							'-DANDROID_PLATFORM=android-24',
+//							'-DANDROID_TOOLCHAIN=clang',
+//							'-DANDROID_CPP_FEATURES=',
+//							'-DANDROID_STL=gnustl_static',
+//							'-DANDROID_ARM_NEON=TRUE'
+//				}
+//			}
+//		}
 		gold {
 			applicationId 'org.ppsspp.ppssppgold'
 			dimension "variant"
@@ -122,7 +122,7 @@ android {
 				cmake {
 					// Available arguments listed at https://developer.android.com/ndk/guides/cmake.html
 					arguments '-DANDROID=true',
-							'-DANDROID_PLATFORM=android-15',
+							'-DANDROID_PLATFORM=android-24',
 							'-DANDROID_TOOLCHAIN=clang',
 							'-DANDROID_CPP_FEATURES=',
 							'-DANDROID_STL=gnustl_static',
